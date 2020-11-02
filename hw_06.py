@@ -65,3 +65,33 @@ class VendingMachine:
     'Получите лимонад.'
     """
     "*** ТВОЙ КОД ЗДЕСЬ ***"
+    def __init__(self, name, cost):
+        self.name = name
+        self.cost = cost
+        self.c = 0
+        self.d = 0
+
+    def vend(self):
+        if self.c == 0:
+            return 'Товара нет в наличии.'
+        elif self.d < self.cost:
+            return 'Нужно дополнительно внести {0} ₽.'.format(self.cost - self.d)
+        else:
+            self.c -= 1
+            self.d -= self.cost
+            if self.d == 0:
+                return 'Получите {0}.'.format(self.name)
+            else:
+                p = self.d
+                self.d = 0
+                return 'Получите {0} и сдачу {1} ₽.'.format(self.name, p)
+
+    def restock(self, c):
+        self.c += c
+        return 'Количество товара «{0}»: {1}'.format(self.name, self.c)
+
+    def deposit(self, d):
+        self.d += d
+        if self.c == 0:
+            return 'Товара нет в наличии. Вот твои деньги — {0} ₽.'.format(self.d)
+        return  'Доступно: {0} ₽'.format(self.d)
