@@ -25,6 +25,14 @@ class Fib():
 
     def next(self):
         "*** ТВОЙ КОД ЗДЕСЬ ***"
+        f = Fib()
+        f.prev = 0
+        if self.value == 0:
+            f.value = 1
+            return f
+        f.value = self.prev + self.value
+        f.prev = self.value
+        return f
 
     def __repr__(self):
         return str(self.value)
